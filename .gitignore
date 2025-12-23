@@ -1,6 +1,19 @@
+# Build artifacts
 dist/
 build/
 *.spec
-__pycache__/
-*.pyc
-.env
+
+# Executables
+*.exe
+*.zip
+
+# Runtime / generated files
+config.json
+hasil/
+
+# Temporary / Word files
+~$*.docx
+
+# OS files
+.DS_Store
+Thumbs.db
