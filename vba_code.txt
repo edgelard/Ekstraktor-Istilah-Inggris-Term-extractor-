@@ -1,0 +1,42 @@
+Sub Italicize_From_Txt_Script(file_path as String)
+
+    Dim fso As Object
+    Dim ts As Object
+    Dim term As String
+    Dim path As String
+
+    path = file_path
+    
+
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    Set ts = fso.OpenTextFile(path, 1)
+
+    Application.ScreenUpdating = False
+
+    Do While Not ts.AtEndOfStream
+        term = Trim(ts.ReadLine)
+
+        If Len(term) > 0 Then
+            With ActiveDocument.Content.Find
+                .ClearFormatting
+                .Replacement.ClearFormatting
+                .Text = term
+                .MatchCase = False
+                .MatchWholeWord = True
+                .Wrap = wdFindStop
+                .Font.Bold = False
+                .Font.Italic = False
+                .Replacement.Text = "^&"
+                .Replacement.Font.Italic = True
+                .Execute Replace:=wdReplaceAll
+            End With
+        End If
+    Loop
+
+    ts.Close
+    Application.ScreenUpdating = True
+
+    MsgBox "Selesai"
+
+End Sub
+
